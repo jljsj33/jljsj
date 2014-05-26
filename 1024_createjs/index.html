@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>2048</title>
+    <style>
+        * {
+            -webkit-user-select: none;
+            user-select: none;
+        }
+                 
+        html { 
+            margin: 0;
+            width: 100%;
+            height: 100%;
+
+            overflow: hidden;
+            text-align: center;
+        }
+        ul, li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+             
+        body {
+            background-color: #c3c38c;
+            margin: 0px 0px 1px 0px; /* the extra 1px allows the iOS inner/outer check to work */
+            width: 100%;
+            height: 100%;
+        }
+        #loading #loading-logo {
+            background-image: url(http://gtms01.alicdn.com/tps/i1/T1CxCpFzJdXXbmU76G-792-288.png);
+            background-repeat: no-repeat;
+            background-size: 396px 144px;
+            width: 36px;
+            height: 36px;
+            margin: 10px auto;
+        }
+        #loading {
+            font-family: "menlo";
+            width: 200px;
+            color: #fff;
+            position: absolute;
+            z-index: 9999;
+            left: 50%;
+            top: 50%;
+            text-align: center;
+            font-size: 14px;
+            margin-top: -30px;
+            margin-left: -100px;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="loading">
+        <div id="loading-logo"></div>
+        <div id="loading-text">加载中...</div>
+    </div>
+    <script>
+        // loading 方法
+        window.onload = function(){
+        var pngW_Num=0,pngH_Num=0,loadInterval;
+        var loadingLogo = document.getElementById("loading-logo");
+    
+        function pngTween(){
+        pngW_Num++;
+        if(pngH_Num==0){
+            if(pngW_Num>=10){
+                pngH_Num++;
+                pngW_Num=0;
+                clearInterval(loadInterval);
+                setTimeout(startLoading,600);
+            }
+        }else if(pngH_Num==1||pngH_Num==2){
+            if(pngW_Num>=9){
+                pngH_Num++;
+                pngW_Num=0;
+                clearInterval(loadInterval);
+                setTimeout(startLoading,600);
+            }
+        }else{
+            if(pngW_Num>=5){
+                pngH_Num=pngW_Num=0;
+                clearInterval(loadInterval);
+                startLoading();
+            }
+        }
+        loadingLogo.style.backgroundPosition = -36*pngW_Num+'px '+-36*pngH_Num+'px';
+        }
+        
+        function startLoading(){
+        loadInterval=setInterval(pngTween,40);
+        };
+            startLoading();
+        };
+    </script>
+</body>
+<script src="js/createjs-2013.12.12.min.js"></script>
+<script src="js/movieclip-0.7.1.min.js"></script>
+<!--<script src="js/easeljs-0.7.1.min.js"></script>
+<script src="http://code.createjs.com/tweenjs-0.5.1.min.js"></script>
+<script src="js/preloadjs-0.4.1.min.js"></script>-->
+<script src="js/TweenLite.min.js"></script>
+<script src="js/EaselPlugin.min.js"></script>
+<script src="js/EasePack.min.js"></script>
+<script src="js/underscore-min.js"></script>
+<script src="js/zepto.min.js"></script>
+<script src="js/main.js"></script>
+
+</html>
